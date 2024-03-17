@@ -9,7 +9,8 @@
 
 #import "emulator.hpp"
 
-Emulator* kiwiEmulator = nullptr;
+std::unique_ptr<Emulator> kiwiEmulator;
+// Emulator* kiwiEmulator = nullptr;
 
 @implementation KiwiObjC
 +(KiwiObjC *) sharedInstance {
@@ -22,7 +23,7 @@ Emulator* kiwiEmulator = nullptr;
 }
 
 -(void) insertGame:(NSURL *)url {
-    kiwiEmulator = new Emulator([url.path UTF8String]);
+    kiwiEmulator = std::make_unique<Emulator>([url.path UTF8String]);
     [self reset];
 }
 
