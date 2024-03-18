@@ -13,7 +13,7 @@ public struct Kiwi {
     
     fileprivate let kiwiObjC = KiwiObjC.shared()
     
-    public func insert(rom url: URL) {
+    public func insert(game url: URL) {
         kiwiObjC.insert(game: url)
     }
     

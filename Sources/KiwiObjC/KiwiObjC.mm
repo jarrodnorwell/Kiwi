@@ -10,7 +10,6 @@
 #import "emulator.hpp"
 
 std::unique_ptr<Emulator> kiwiEmulator;
-// Emulator* kiwiEmulator = nullptr;
 
 @implementation KiwiObjC
 +(KiwiObjC *) sharedInstance {
