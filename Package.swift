@@ -11,11 +11,14 @@ let package = Package(
         .library(name: "KiwiCXX", targets: ["KiwiCXX"]),
         .library(name: "KiwiObjC", targets: ["KiwiObjC"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/jarrodnorwell/XBRZ", branch: "main")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.d
         .target(name: "Kiwi", dependencies: ["KiwiObjC"]),
-        .target(name: "KiwiCXX", sources: ["", "bus", "cartridge", "controller", "cpu", "mappers", "ppu"], publicHeadersPath: "include", swiftSettings: [
+        .target(name: "KiwiCXX", dependencies: ["XBRZ"], sources: ["", "bus", "cartridge", "controller", "cpu", "mappers", "ppu"], publicHeadersPath: "include", swiftSettings: [
             .interoperabilityMode(.Cxx)
         ]),
         .target(name: "KiwiObjC", dependencies: ["KiwiCXX"], publicHeadersPath: "include", swiftSettings: [

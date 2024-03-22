@@ -7,6 +7,8 @@
 #include "ppu/ppu.hpp"
 #include "ppu/ppu_bus.hpp"
 
+#include <xbrz/xbrz.h>
+
 class Emulator {
 
 private:
@@ -55,7 +57,13 @@ public:
     ///
     /// @return a 32-bit pointer to the screen buffer's first address
     ///
-    inline std::uint32_t* get_screen_buffer() { return ppu.get_screen_buffer(); };
+    inline std::uint32_t* get_screen_buffer() {
+        static std::vector<uint32_t> trgt(WIDTH * HEIGHT * xbrz::SCALE_FACTOR_MAX);
+        xbrz::scale(xbrz::SCALE_FACTOR_MAX, ppu.get_screen_buffer(), trgt.data(), WIDTH, HEIGHT, xbrz::ColorFormat::ARGB);
+        return trgt.data();
+        
+        /*return ppu.get_screen_buffer();*/
+    };
 
     /// Return a 8-bit pointer to the RAM buffer's first address.
     ///
